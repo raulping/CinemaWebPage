@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Sign-in</title>
+        <link rel="stylesheet" href="public/login.css">
+    </head>
+    <body>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+            <div class = "hyperlinks">
+                <a href="/">Home</a>
+                <a href="/map">Location</a>
+                <a href="/register">Register</a>
+            </div>
+        </header>
+        <h1>User Sign-in</h1>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <div th:if="${param.registered}">
+            Your new user has been registered.
+        </div>
+        <div class = "box">
+            <form th:action="@{/login}" method="post">
+                <div id = "form_entry"><label>Email: <input type="email" name="username" required/></label></div>
+                <div id = "form_entry"><label >Password: <input type="password" name="password" required/></label></div>
+                <div id = "form_entry"><label>Confirm: <input type="submit" value="Sign In"/></label> </div>
+            </form>
+        </div>
+        <section id = "footer">
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" href="public/login.css">
+    </head>
+    <body>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+        </header>
+        <div class = "hyperlinks">
+            <a href="/">Home</a>
+            <a href="/register_movie">Add movie</a>
+            <a href="/projection_manager">Add Projection</a>
+        </div>
+        <h1>Register Screen</h1>
+        <p>Please fill in this form to create a screen.</p>
+        <div th:if="${param.duplicate_screen}">
+            Screen already exists
+        </div>
+        <div class = "box">
+            <form th:action="@{/edit_screen}" th:object="${screen}" method="post">
+                <div id = "form_entry"> 
+                    <label>Screen Name: <input type="text" th:field="*{name}" required></label>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </div>
+                <div id = "form_entry">
+                    <label>Total seats: <input type="number" th:field="*{total_seats}" required min="0"></label>
+                    <td th:if="${#fields.hasErrors('total_seats')}" th:errors="*{total_seats}">Seats Error</td>
+                </div>    
+                <div id = "form_entry">
+                    <label>Confirm: <input type="submit" value="Sign Up"></label>
+                </div>
+            </form>
+        </div>
+        <section>
+            <div class="screenDisplay">
+                <table id = "screenTable">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Total seats</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="screen : ${screens}">
+                        <td th:text="${screen.getName()}"></td>
+                        <td th:text="${screen.getTotal_seats()}"></td>
+                        <td> 
+                            <form th:action="@{/delete_screen}" method="POST">        
+                                <input type = "hidden" name="screenId" th:value = "${screen.getId()}" required>
+                                <input type = "submit" value = "Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id = "footer">
+            <a href="/">Home</a>
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>
+    </body>
+</html>

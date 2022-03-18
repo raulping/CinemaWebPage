@@ -1,0 +1,8 @@
+echo 'SELECT * FROM user;' | mysql -h mysql -u 22_appweb_08 -p -D 22_appweb_08a
+5eiIJdM2
+./gradlew bootRun
+
+http://localhost:8080/
+
+INSERT INTO screen (name, total_seats, available_seats)
+VALUES ("Screen1", 30, 30);

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" href="public/homecinema.css">
+        
+    </head>
+    
+    <body>
+        <img id="pop" src="public/pop.png">
+        <img id="pop2" src="public/pop.png">
+        <div id="usericon">
+            <a th:href = "@{/user}">
+                <img alt="Use" src="/public/usericonGood.png" width="70" height="65">
+            </a>
+            <div th:if="${log == 1}"> 
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
+            
+        </div>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+            <div class = "hyperlinks">
+                <a href="/map">Location</a>
+                <div th:if="${user.getRole() == 'MANAGER'}">
+                    <a href="/register_movie">Add movie</a>
+                    <a href="/register_screens">Add Screen</a>
+                    <a href="/projection_manager">Add Projection</a>
+                </div>
+            </div>
+        </header>
+        <section class="content">
+            <h2>BILLBOARD</h2>
+            <div class="slideshow-container" th:each="movie : ${movies}">
+                <div class="mySlides fade">
+                    <a th:href = "@{/movie/{id}(id = ${movie.getId()})}">
+                        <img th:src="@{/{name}(name=${movie.getPhoto()})}" style="width:100%" width="800" height="1000">
+                    </a>
+                    <div class="slide_text">
+                        <p th:text="${movie.getTitle()}"></p>
+                        <p th:text= "${movie.getDuration()} + ' mins'"></p>
+                    </div>
+                    <div>
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                    <div th:if="${user.getRole() == 'MANAGER'}">
+                        <form class="delete" th:action="@{/delete_movie}" method="POST">        
+                            <input type = "hidden" name="movieId" th:value = "${movie.getId()}" required>
+                            <input type = "submit" value = "Delete">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </section>
+        <section id = "footer">
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+        <script src="public/slideshow.js" type="text/javascript"></script>
+        <script src="public/pop.js" type="text/javascript"></script>
+    </body>
+</html>

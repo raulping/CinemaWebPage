@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" href="public/homecinema.css">
+        
+    </head>
+    
+    <body>
+        <div id="usericon">
+            <a th:href = "@{/user}">
+                <img alt="Use" src="/public/usericonGood.png" width="70" height="65">
+            </a>
+            <div th:if="${log == 1}"> 
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
+            
+        </div>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+            <div class = "hyperlinks">
+                <a href="/">Home</a>
+                <div th:if="${user.getRole() == 'MANAGER'}">
+                    <a href="/register_movie">Add movie</a>
+                    <a href="/register_screens">Add Screen</a>
+                    <a href="/projection_manager">Add Projection</a>
+                </div>
+            </div>
+        </header>
+        <div>
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3041.103278683565!2d-3.8496159838723005!3d40.340054879374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd418fe6f75a0f4f%3A0x708b952f055618bc!2sOCINE%20Urban!5e0!3m2!1sen!2ses!4v1639526614423!5m2!1sen!2ses" allowfullscreen="" loading="lazy"></iframe>
+        </div>

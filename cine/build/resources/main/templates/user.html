@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>User View</title>
+        <link rel="stylesheet" type="text/css" href="/public/homecinema.css">
+    </head>
+    <body>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+            <div class = "hyperlinks">
+                <a href="/">Home</a>
+            </div>
+        </header>
+        <section id="reservations">
+            <h2 th:text="${user.getName()}"><em><strong>User name here</strong> Infromation </em></h2>
+            <div class="reservationDisplay">
+                <table id = "reservationTable">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Time Of Projetcion</th>
+                        <th>Number Of Seats</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reservation : ${user.getReservations()}">
+                        <td th:text="${reservation.getProjection().getMovie().getTitle()}"></td>
+                        <td th:text="${reservation.getProjection().getDate()}"></td>
+                        <td th:text="${reservation.getSeats()}"></td>
+                        <td th:text="${reservation.getDate()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id = "footer">
+            <div>
+                <a th:text="${user.getEmail()}" th:href = "@{/user/{id}(id = ${user.getId()})}"></a>
+            </div>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>
+    </body>
+</html>

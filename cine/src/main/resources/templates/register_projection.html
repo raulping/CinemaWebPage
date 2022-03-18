@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" href="public/login.css">
+    </head>
+    <body>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+        </header>
+        <div class = "hyperlinks">
+            <a href="/">Home</a>
+            <a href="/register_movie">Add movie</a>
+            <a href="/register_screens">Add Screen</a>
+        </div>
+        <h1>Register Projection</h1>
+        <div class = "box">
+            <form  th:action="@{/projection_manager}" method="post">
+                <p>Create new projection</p>
+                <div id = "form_entry">
+                    <label>Movie: 
+                        <select name="movieId" required>
+                            <option th:each="movie : ${movies}" th:value="${movie.getId()}" th:text="${movie.getTitle()}"></option>
+                        </select>
+                    </label>
+                </div>
+                <div id = "form_entry">
+                    <label>Screen: 
+                        <select name="screenId" required>
+                            <option th:each="screen : ${screens}" th:value="${screen.getId()}" th:text="${screen.getName()}"></option>
+                        </select>
+                    </label>
+                </div>
+                <div  id = "form_entry">
+                    <label> Date: <input type="datetime-local" name="date" required></label>
+                </div>
+                <div id = "form_entry">
+                    <label>Confirm: <input type="submit" value="Create projection"></label>
+                </div>
+            </form> 
+        </div>
+        <section id = "footer">
+            <a href="/">Home</a>
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>       
+    </body>
+</html>
+

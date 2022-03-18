@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" href="public/login.css">
+    </head>
+    <body>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+            <div class = "hyperlinks">
+                <a href="/">Home</a>
+                <a href="/map">Location</a>
+                <a href="/login">Login</a>
+            </div>
+        </header>
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <div th:if="${param.duplicate_email}">
+            Email already in use for existing user
+        </div>
+        <div th:if="${param.duplicate_name}">
+            Name already in use for existing user
+        </div>
+        <div th:if="${param.passwords}">
+            Passwords are not the same
+        </div>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <div id = "form_entry">
+                <label>User name: <input type="text" th:field="*{name}" required></label>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            </div>
+            <div id = "form_entry">
+                <label>Email: <input type="email" th:field="*{email}" required></label>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+            </div>
+            <div id = "form_entry">
+                <label>Password: <input type="password" th:field="*{password}" required></label>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+            </div>
+            <div id = "form_entry"><label>Repeat password: <input type="password" name="passwordRepeat" required></label></div>
+            <div><input type="submit" value="Sign Up"></div>
+        </form>   
+        <section id = "footer">
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>     
+    </body>
+</html>
+

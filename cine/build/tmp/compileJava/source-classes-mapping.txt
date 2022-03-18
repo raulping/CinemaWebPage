@@ -1,0 +1,32 @@
+microblog/model/ReservationRepository.java
+ microblog.model.ReservationRepository
+microblog/services/UserService.java
+ microblog.services.UserService
+microblog/model/UserRepository.java
+ microblog.model.UserRepository
+microblog/MicroblogApplication.java
+ microblog.MicroblogApplication
+microblog/model/Movie.java
+ microblog.model.Movie
+microblog/model/Screen.java
+ microblog.model.Screen
+microblog/services/UserDetailsServiceImpl.java
+ microblog.services.UserDetailsServiceImpl
+microblog/WebSecurityConfig.java
+ microblog.WebSecurityConfig
+microblog/model/MovieRepository.java
+ microblog.model.MovieRepository
+microblog/model/Projection.java
+ microblog.model.Projection
+microblog/model/User.java
+ microblog.model.User
+microblog/model/Reservation.java
+ microblog.model.Reservation
+microblog/model/ProjectionRepository.java
+ microblog.model.ProjectionRepository
+microblog/services/UserServiceImpl.java
+ microblog.services.UserServiceImpl
+microblog/model/ScreenRepository.java
+ microblog.model.ScreenRepository
+microblog/controllers/MainController.java
+ microblog.controllers.MainController

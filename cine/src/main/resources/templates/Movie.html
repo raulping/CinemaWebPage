@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" type="text/css" href="/public/movieView.css">
+    </head>
+    <body>
+        <div id="usericon">
+            <a th:href = "@{/user}">
+                <img alt="Use" src="/public/usericonGood.png" width="70" height="65">
+            </a>
+            <div th:if="${log == 1}"> 
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
+        </div>
+        <header>
+            <h1 th:text="${movie.getTitle()}"></h1>
+            <div class = "hyperlinks">
+                <a href="/">Home</a>
+                <a href="/map">Location</a>
+                <div th:if="${user.getRole() == 'MANAGER'}">
+                    <a href="/register_movie">Add movie</a>
+                    <a href="/register_screens">Add Screen</a>
+                    <a href="/projection_manager">Add Projection</a>
+                </div>
+            </div>
+        </header>
+        <section class="content">
+            <img id="photo" th:src="@{/{name}(name=${movie.getPhoto()})}" width="310" height="400">
+            <div>
+                <h4>Synopsis: </h4>
+                <p th:text="${movie.getSynopsis()}"></p>
+                <h4>Duration: </h4>
+                <p th:text="${movie.getDuration()}"></p>
+                <h4>Director: </h4>
+                <p th:text="${movie.getDirector()}"></p>
+                <h4>Cast: </h4>
+                <p th:text="${movie.getCast()}"></p>
+                <h4>Projections: </h4>
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Date and Time</th>
+                            <th>Screen</th>
+                            <th>Reserve</th>
+                            <div th:if="${user.getRole() == 'MANAGER'}">
+                                <th>Delete</th>
+                            </div>                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="projection : ${movie.getProjections()}">
+                                <td th:text="${projection.getDate()}"></td>
+                                <td th:text="${projection.getScreen().getName()}"></td>
+                                <td><a th:href="@{/projection/{id}(id = ${projection.getId()})}">Reserve</a></td>
+                                <div th:if="${user.getRole() == 'MANAGER'}">
+                                    <td> 
+                                        <form th:action="@{/delete_proj}" method="POST">        
+                                            <input type = "hidden" name="projectionId" th:value = "${projection.getId()}" required>
+                                            <input type = "submit" value = "Delete">
+                                        </form>
+                                    </td>
+                                </div>                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id = "footer">
+            <a href="/">Home</a>
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>
+    </body>
+</html>

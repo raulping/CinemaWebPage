@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" href="public/login.css">
+    </head>
+    <body>
+        <header>
+            <h1>Pop Drop Cinema</h1>
+        </header>
+        <div class = "hyperlinks">
+            <a href="/">Home</a>
+            <a href="/register_screens">Add Screen</a>
+            <a href="/projection_manager">Add Projection</a>
+        </div>
+        <h1>Register Movie</h1>
+        <p id="p">Please fill in this form to create a movie.</p>
+        <section id="movReg">
+            <div th:if="${param.duplicate_movie}">
+                Movie already existing.
+            </div>
+            <div class = "box">
+                <form th:action="@{/register_movie}" th:object="${movie}" method="post">
+                    <div id = "form_entry">
+                        <label>Movie Poster: <input type="text" th:field="*{photo}" required></label>
+                        <td th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">Photo Error</td>
+                    </div>
+                    <div id = "form_entry">
+                        <label>Title: <input type="text" th:field="*{title}" required></label>
+                        <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</td>
+                    </div>
+                    <div id = "form_entry">
+                        <label> Synopsis: <input type="text" th:field="*{synopsis}" maxlength="9999" required></label>
+                        <td th:if="${#fields.hasErrors('synopsis')}" th:errors="*{synopsis}">Synopsis Error</td>
+                    </div>
+                    <div id = "form_entry">
+                        <label> Duration: <input type="text" th:field="*{duration}" required></label>
+                        <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration Error</td>
+                    </div>
+                    <div id = "form_entry">
+                        <label>Director: <input type="text" th:field="*{director}" required></label>
+                        <td th:if="${#fields.hasErrors('director')}" th:errors="*{director}">Director Error</td>
+                    </div>
+                    <div id = "form_entry">
+                        <label>Cast: <input type="text" th:field="*{cast}" maxlength="254" required></label>
+                        <td th:if="${#fields.hasErrors('cast')}" th:errors="*{cast}">Cast Error</td>
+                    </div>
+            
+                    <div id = "form_entry">
+                        <label>Confirm: <input type="submit" value="Sign Up"></label>
+                    </div>
+                </form>  
+            </div>
+            
+        </section>
+        <section id = "footer">
+
+            <footer><small>Developed for Web applications by Juan Cerda and Raul Diaz </small></footer>
+        </section>    
+    </body>
+</html>

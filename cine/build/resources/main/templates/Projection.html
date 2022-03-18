@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pop Drop Cinema</title>
+        <link rel="stylesheet" type="text/css" href="/public/homecinema.css">
+    </head>
+    <body>
+        <header>
+            <h1>Reservation</h1>
+            <div class = "hyperlinks">
+                <a href="/">Home</a>
+            </div>
+
+        </header>
+        <section class="content">
+            <div>
+                <h4>Movie: </h4>
+                <p th:text="${projection.getMovie().getTitle}"></p>
+                <h4>Screen: </h4>
+                <p th:text="${projection.getScreen().getName()}"></p>
+                <h4>Available Seats: </h4>
+                <p th:text="${available_seats}"></p>
+                <h4>Day and time: </h4>
+                <p th:text="${projection.getDate()}"></p>
+                <h4>Select number of tickets: </h4>
+                <form th:action="@{/make_reservation}" method="post">
+                    <input name="tickets" type="number" min="0" th:max="${available_seats}">
+                    <input name="projectionId" type="hidden" th:value="${projection.getId()}">
+                    <input type="submit" value="Buy" onclick="window.print();">
+                </form>
+            </div>
+        </section>
+        <footer id = "footer"><small>Developed for Web applications by Juan Cerda and Raul Diaz</small></footer>
+    </body>
+</html>
